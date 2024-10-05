@@ -1,0 +1,14 @@
+.layout-container {
+    background-color: #043D32;
+    height: 100vh;
+    overflow-y: auto; 
+}
+
+.content-container {
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto; 
+}

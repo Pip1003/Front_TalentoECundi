@@ -1,0 +1,13 @@
+.titulo {
+    color: var(--Secondary-550, #FAD105);
+    text-align: center;
+    font-family: Inter;
+    font-size: 2.5rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.logo-img {
+    height: 80px;
+}

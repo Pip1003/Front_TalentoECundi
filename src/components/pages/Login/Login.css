@@ -1,0 +1,27 @@
+.login-box {
+  background-color: #fdf6e3; /* Fondo crema */
+  border-radius: 10px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #054a29; 
+}
+
+a {
+  color: #054a29; 
+  font-size: 0.9rem;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  background-color: #054a29; /* Verde oscuro */
+  border: none;
+}
