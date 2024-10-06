@@ -1,6 +1,5 @@
 import React from 'react';
 import Navbar from '../Navbar/Navbar';
-import { Container } from 'react-bootstrap';
 import styles from './styles.module.css';
 
 interface LayoutProps {
@@ -9,10 +8,10 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
     return (
-        <div>
+        <div className={styles.content}>
             <Navbar />
             <div className={styles.container}>
-                {children}
+                <div className='mt-4'>{children}</div>
             </div>
         </div>
     );

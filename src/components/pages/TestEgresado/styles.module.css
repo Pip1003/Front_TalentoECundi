@@ -1,0 +1,23 @@
+/* styles.module.css */
+
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.subjectLabel {
+    display: inline-block;
+    background-color: #FCEC74;
+    color: #644902;
+    padding: 0.25em 0.75em;
+    margin-right: 0.5em;
+    border-radius: 0.25em;
+    font-size: 14px;
+    font-weight: bold;
+    border-color: #C89104;
+    border-width: 20px;
+}
+
+.buttonFinalize {
+    background-color: #00482B;
+    border-color: #00482B;
+}

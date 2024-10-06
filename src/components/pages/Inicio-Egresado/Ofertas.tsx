@@ -6,9 +6,8 @@ import Layout from '../../layouts/LayoutAuth/Layout';
 const Ofertas: React.FC = () => {
   return (
     <Layout>
-      <div className='content my-4'>
+      <div className='content'>
       
-        {/* Fila principal que contiene las ofertas */}
         <Row>
         
           {/* Columna izquierda (Ofertas) */}
