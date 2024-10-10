@@ -8,7 +8,8 @@ import RegistroEgresado from './components/pages/Registro/RegistroEgresado/Regis
 import RegistroEmpresa from './components/pages/Registro/RegistroEmpresa/RegistroEmpresa';
 import Ofertas from './components/pages/Inicio-Egresado/Ofertas';
 import AuthGuard from './Guard/AuthGuard';
-import Test from './components/pages/TestEgresado/Test';
+import TestEgresado from './components/pages/TestEgresado/Test';
+import ResultadosTest from './components/pages/ResultadosTest/ResultadosTest';
 
 const App: React.FC = () => {
   return (
@@ -21,7 +22,8 @@ const App: React.FC = () => {
         <Route path="/registro-egresado" element={<RegistroEgresado />} />
         <Route path="/registro-empresa" element={<RegistroEmpresa />} />
         <Route path="/inicio" element={ <AuthGuard requiredRole={1}><Ofertas /></AuthGuard>} />
-        <Route path="/test" element={ <AuthGuard requiredRole={1}><Test /></AuthGuard>} />
+        <Route path="/test" element={ <AuthGuard requiredRole={1}><TestEgresado /></AuthGuard>} />
+        <Route path="/resultadosTest" element={ <AuthGuard requiredRole={1}><ResultadosTest /></AuthGuard>} />
       </Routes>
     </Router>
   );

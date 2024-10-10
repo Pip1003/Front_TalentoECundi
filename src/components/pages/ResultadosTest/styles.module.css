@@ -1,0 +1,163 @@
+/* Estilos para la barra lateral de estadísticas */
+.sidebar {
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.card{
+    background-color: #C89104; 
+    color: #003A22;
+    text-align: center;
+    border: none;
+}
+
+.resultHeader {
+    font-weight: 20px;
+    font-size: 20px;
+    margin-bottom: 7px;
+    color: #003A22;
+}
+
+.resultValue {
+    font-size: 20px;
+    font-weight: bold;
+    color: #FFF;
+}
+
+.habilidad {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FCEC74;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+
+.habilidadTexto {
+    font-size: 16px;
+    font-weight: bold;
+    color: #644902;
+}
+
+
+.habilidadPorcentaje {
+    background-color: #644902; 
+    color: white;
+    border-radius: 5px;
+    padding: 4px 12px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); 
+}
+
+
+.questionButton {
+    width: 40px;               
+    height: 40px;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+.questionButton.active {
+    background-color: #003A22;
+    color: white;
+    border-color: #003A22;
+}
+
+
+.correctButton {
+    background-color: #598573;  
+    color: #002416;
+    border: none;
+}
+
+
+.incorrectButton {
+    background-color: #C12D2F;  
+    color: #002416;
+    border: none;
+}
+
+
+.finalizarButton {
+    background-color: #003A22;  
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 10px;
+    width: 100%;
+}
+
+/* Estilos para el cuerpo principal de las preguntas */
+.mainContent {
+    background-color: #C1D1CB;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 10px;
+}
+
+
+.questionCard {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #FFFFFF;
+    border-left: 8px solid #C89104; 
+}
+
+.imagenPregunta {
+    max-width: 100%; 
+    height: auto; 
+    margin: 0 auto; 
+}
+
+
+.subjectLabel {
+    display: inline-block;
+    background-color: #FCEC74; 
+    color: #644902;
+    font-weight: bold;
+    padding: 5px 10px;
+    margin-right: 10px;
+    border-radius: 3px;
+}
+
+
+.correctAnswer {
+    background-color: #598573; 
+    color: #000000;
+    padding: 8px;
+    border-radius: 5px;
+    margin-bottom: 17px;
+    font-weight: bold;
+    font-size: 13px;
+    max-width: 137px;
+    text-align: center;
+}
+
+
+.incorrectAnswer {
+    background-color: #C12D2F; 
+    color: #000;
+    padding: 8px;
+    border-radius: 5px;
+    margin-bottom: 17px;
+    font-weight: bold;
+    font-size: 13px;
+    max-width: 145px;
+    text-align: center;
+}
+
+.respuestaContenedor {
+    background-color: #FEF7C1;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 15px;
+}
+
+
