@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import Layout from '../../../layouts/LayoutGeneral/Layout';
-import { TextField, Button, Typography, Box, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
+import { TextField, Button, Typography, Box, MenuItem, Select, FormControl, InputLabel, Snackbar, Alert } from '@mui/material';
 import { RegistroEgresadoService } from '../../../../Services/RegistroEgService'; 
 import { useNavigate } from 'react-router-dom';
 
@@ -29,6 +29,12 @@ const RegistroEgresado: React.FC = () => {
         contrasena: '',
         confirmarContrasena: ''
     });
+
+    // Estado para controlar el Snackbar
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+
+    // Estado para controlar si se debe redirigir
+    const [shouldRedirect, setShouldRedirect] = useState(false);
 
     const navigate = useNavigate();
 
@@ -115,8 +121,11 @@ const RegistroEgresado: React.FC = () => {
             try {
                 const response = await RegistroEgresadoService(formData);
                 console.log(response);
-                alert('Registro exitoso');
-                navigate('/');
+                // Mostrar el Snackbar cuando el registro sea exitoso
+                setOpenSnackbar(true);
+                // Subir el scrollbar al principio de la página
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                setTimeout(() => setShouldRedirect(true), 1500); 
             } catch (error: any) {
                 if (error.message === 'El correo ya está registrado') {
                     setErrors((prevErrors) => ({
@@ -130,6 +139,21 @@ const RegistroEgresado: React.FC = () => {
         }
     };
 
+    
+    useEffect(() => {
+        if (shouldRedirect) {
+            navigate('/'); 
+        }
+    }, [shouldRedirect, navigate]);
+
+    // Función para cerrar el Snackbar manualmente
+    const handleCloseSnackbar = (event?: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpenSnackbar(false);
+    };
+
     return (
         <Layout>
             <Container className="mt-4">
@@ -139,6 +163,7 @@ const RegistroEgresado: React.FC = () => {
                     </Typography>
                 </Box>
                 <Box sx={{ maxWidth: '100%' }}>
+                    {/* Campos de formulario */}
                     <TextField
                         fullWidth
                         label="Nombres"
@@ -279,7 +304,6 @@ const RegistroEgresado: React.FC = () => {
                         error={!!errors.confirmarContrasena}
                         helperText={errors.confirmarContrasena}
                     />
-
                     <Button
                         variant="contained"
                         sx={{
@@ -312,6 +336,18 @@ const RegistroEgresado: React.FC = () => {
                     >
                         Iniciar Sesión
                     </Button>
+
+                    {/* Snackbar para mostrar el mensaje de éxito */}
+                    <Snackbar
+                        open={openSnackbar}
+                        autoHideDuration={5000} // Se cerrará automáticamente después de 5 segundos
+                        onClose={handleCloseSnackbar}
+                        anchorOrigin={{ vertical: 'top', horizontal: 'center' }} // Posicionado en la parte superior
+                    >
+                        <Alert onClose={handleCloseSnackbar} severity="success" sx={{ width: '100%' }}>
+                            ¡Registro exitoso!
+                        </Alert>
+                    </Snackbar>
                 </Box>
             </Container>
         </Layout>

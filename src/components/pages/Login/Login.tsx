@@ -9,7 +9,7 @@ const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,10 +17,15 @@ const Login: React.FC = () => {
 
     try {
       const response = await login(email, password);
-      console.log('Login exitoso:', response);
+      if (response) {
+        if (response.usuario.id_rol === 2) {
+          navigate('/publicaciones');
+        } else if (response.usuario.id_rol === 1) {
+          navigate('/inicio');
+        }
+      }
+      //console.log('Login exitoso:', response);
 
-      
-      navigate('/inicio');
     } catch (error: any) {
       setError(error.message);
     }

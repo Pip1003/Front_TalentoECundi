@@ -1,0 +1,131 @@
+.container {
+    padding: 8px;
+    background-color: #00482B;
+    min-height: 100vh;
+  }
+  
+  .formContainer {
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .leftSection {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #00482B;
+    border-radius: 10px;
+    padding: 2rem;
+    color: #fff;
+  }
+  
+  .bannerContainer {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  .bannerImage {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  .profilePictureContainer {
+    margin-top: -4rem;
+    border: 4px solid #FBE122;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 120px;
+    height: 120px;
+  }
+  
+  .avatar {
+    width: 100% !important;
+    height: 100% !important;
+  }
+  
+  .companyName {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    color: #FBE122;
+  }
+
+  .companyInfo {
+    text-align: center; 
+    color: #FFF; 
+    margin-top: 1rem; 
+    font-weight: 500; 
+    line-height: 1.6; 
+    padding: 1rem; 
+    border-radius: 8px; 
+    background-color: rgba(0, 72, 43, 0.8); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  }
+  
+  .rightSection {
+    width: 60%;
+    padding-left: 2rem;
+  }
+  
+  .form {
+    color: #00482B;
+  }
+  
+  .formLabel {
+    color: #00482B;
+    font-weight: bold;
+  }
+  
+  .formRow {
+    margin-bottom: 1.5rem;
+  }
+  
+  .formControl {
+    border: 1px solid #00482B;
+    border-radius: 5px;
+    padding: 0.5rem;
+  }
+  
+  .customSelect {
+    border: 1px solid #00482B;
+    border-radius: 5px;
+    padding: 0.5rem;
+  }
+  
+  .saveButtonContainer {
+    text-align: right;
+    margin-top: 2rem;
+  }
+  
+  .saveButton {
+    background-color: #FBE122;
+    color: #00482B;
+    border: none;
+    padding: 0.75rem 2rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .saveButton:hover {
+    background-color: #e5c910;
+    color: #00482B;
+  }
+  
+  .spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .bannerImage,
+  .avatar {
+    object-fit: cover;
+  }
+  

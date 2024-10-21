@@ -1,0 +1,317 @@
+/* src/pages/styles.module.css */
+
+/* Contenedor Principal */
+.ofertasContainer {
+  padding: 20px;
+  background-color: #f4f6f8;
+}
+
+/* Estilo del título de la sección */
+.sectionTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #00482b;
+  margin-bottom: 20px;
+}
+
+/* Card de Oferta */
+.ofertaCard {
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+/* Header de la Card */
+.cardHeader {
+  margin-bottom: 20px;
+}
+
+.ofertaTitulo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #00482b;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.fechas {
+  margin-bottom: 15px;
+}
+
+.fecha {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Sección de la Empresa */
+.empresaSection {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.logoEmpresa {
+  width: 42px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10%;
+  margin-right: 15px;
+}
+
+.empresaLink {
+  font-size: 1rem;
+  color: #00482b;
+}
+
+.empresaLink a {
+  color: #00482b;
+  text-decoration: none;
+}
+
+.empresaLink a:hover {
+  text-decoration: underline;
+}
+
+/* Descripción */
+.descripcion {
+  margin-bottom: 20px;
+}
+
+.descripcion h5 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #00482b;
+}
+
+.descripcion p {
+  color: #333;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+/* Información de la Oferta */
+.informacionOferta {
+  margin-bottom: 20px;
+}
+
+.informacionOferta p {
+  margin-bottom: 5px;
+  font-size: 0.95rem;
+}
+
+.informacionOferta strong {
+  color: #00482b;
+}
+
+.salario {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #00482b;
+}
+
+/* Botón de Inscripción */
+.botonesOferta {
+  background-color: #00482b !important;
+  color: #ffffff !important;
+  font-weight: bold !important;
+  padding: 10px 20px !important;
+  border: none !important;
+  transition: all 0.3s ease !important;
+  margin-right: 15px !important;
+}
+
+.botonesOferta:hover {
+  background-color: #00301e;
+  transform: scale(1.05);
+}
+
+/* Card de Filtros */
+.filtrosCard {
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  background-color: #2b5c4e; /* Verde similar al de la imagen */
+  color: #ffffff;
+}
+
+/* Input de búsqueda */
+.searchInput {
+  border-radius: 8px;
+  padding: 10px;
+  border: none;
+  outline: none;
+  box-shadow: inset 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Nota de los filtros */
+.filterNote {
+  font-size: 0.9rem;
+  color: #d3d3d3;
+  text-align: center;
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* Label de cada campo */
+.formLabel {
+  color: #d3f4e2; /* Color claro para contraste */
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+/* Input de rango de salario */
+.salaryInput {
+  border-radius: 8px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  width: 50%;
+}
+
+/* Select inputs */
+.selectInput {
+  border-radius: 8px;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+/* Contenedor de habilidades */
+.skillsContainer {
+  margin-top: 10px;
+}
+
+.skillCheck {
+  color: #ffffff;
+}
+
+/* Botón de Filtrar */
+.filtrarButton {
+  background-color: #00482b;
+  border: none;
+  padding: 10px 0;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.filtrarButton:hover {
+  background-color: #00301e;
+  transform: scale(1.05);
+}
+
+/* Card de Inscripciones */
+.inscripcionesCard {
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  background-color: #ffffff;
+}
+
+.inscripcionesHeader {
+  background-color: #00482b;
+  color: #ffffff;
+  font-size: 1.5rem;
+  text-align: center;
+  font-weight: bold;
+  padding: 15px;
+  border-radius: 12px 12px 0 0;
+}
+
+.inscripcionesList {
+  padding: 10px 0;
+}
+
+.inscripcionItem {
+  padding: 15px;
+  background-color: #e9f1ed;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.inscripcionItem:hover {
+  background-color: #dbe8e3;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.inscripcionTitulo {
+  font-size: 1.3rem;
+  color: #00482b;
+}
+
+.inscripcionFechas {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.inscripcionEmpresaImg {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 10%;
+}
+
+.eliminarButton {
+  width: 40px; 
+  height: 40px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #dc3545;
+  color: #FFF;
+}
+
+.empresaLink {
+  font-size: 1rem;
+  color: #00482b;
+  text-decoration: none;
+}
+
+.empresaLink:hover {
+  text-decoration: underline;
+}
+
+/* Estado de Inscripción */
+.inscripcionEstado {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 5px;
+  margin-left: 5px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.estadoSegundaFase {
+  background-color: #00482b;
+  color: #ffffff;
+}
+
+.estadoPendiente {
+  background-color: #fbe122;
+  color: #5a5a00;
+}
+
+.estadoRechazada {
+  background-color: #f44336;
+  color: #ffffff;
+}
+
+/* Botón de eliminar */
+.eliminarButton {
+  color: #f44336;
+  font-size: 1.2rem;
+  padding: 0;
+  transition: color 0.3s ease;
+}
+
+.eliminarButton:hover {
+  color: #b71c1c;
+}
+
+/* Footer de Paginación */
+.paginationFooter {
+  background-color: #ffffff;
+  border-top: none;
+  padding: 15px 0;
+}
+

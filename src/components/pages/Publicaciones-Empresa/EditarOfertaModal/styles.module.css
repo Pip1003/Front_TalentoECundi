@@ -1,0 +1,41 @@
+.modalContent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 600px; 
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    outline: none;
+    max-height: 80vh; 
+    overflow-y: auto; 
+  }
+  
+  .modalTitle {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .customButton {
+    background-color: #00482B !important;
+    color: #ffffff !important;
+    font-weight: bold;
+    border-radius: 5px;
+  }
+  
+  .customButton:hover {
+    background-color: #00321E !important; 
+  }
+  
+  .estadoOferta {
+    font-size: 0.9rem;
+  }
+  
+  .mb-3 {
+    margin-bottom: 20px;
+  }
+  

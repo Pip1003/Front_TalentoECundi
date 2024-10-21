@@ -1,0 +1,50 @@
+.modalContent {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    padding: 15px;
+  }
+  
+  .modalContent p {
+    margin-bottom: 10px;
+  }
+  
+  .modalContent strong {
+    color: #00482b; 
+  }
+  
+  .modalContent p:last-child {
+    margin-bottom: 0;
+  }
+  
+  .modalTitle {
+    color: #00482b;
+    font-weight: bold;
+    font-size: 1.8rem;
+  }
+  
+  .modalBody {
+    padding: 20px;
+    background-color: #f9f9f9; 
+  }
+  
+  .modalFooter {
+    padding: 15px;
+    text-align: right;
+  }
+  
+  .closeButton {
+    background-color: #ccc;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #333;
+    transition: background-color 0.3s ease;
+  }
+  
+  .closeButton:hover {
+    background-color: #999;
+    color: white;
+  }
+  

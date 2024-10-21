@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import Layout from '../../layouts/LayoutGeneral/Layout';
-import { TextField, Button, Typography, Box } from '@mui/material';
+import { TextField, Button, Typography, Box, Snackbar, Alert } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { cambiarContraseña } from '../../../Services/RecuperacionService';
 
@@ -12,7 +12,9 @@ const Reestablecer: React.FC = () => {
     const [nuevaContrasena, setNuevaContrasena] = useState('');
     const [confirmarContrasena, setConfirmarContrasena] = useState('');
     const [error, setError] = useState('');
-    const [successMessage, setSuccessMessage] = useState('');
+    const [openSnackbar, setOpenSnackbar] = useState(false); 
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+    const [snackbarSeverity, setSnackbarSeverity] = useState<'success' | 'error'>('success'); 
 
     useEffect(() => {
         // Verificar si el token está presente
@@ -21,20 +23,35 @@ const Reestablecer: React.FC = () => {
         }
     }, [token, navigate]);
 
+    // Manejar el cierre del Snackbar
+    const handleCloseSnackbar = (event?: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpenSnackbar(false);
+    };
+
     const handleActualizarContrasena = async () => {
         setError('');
-        setSuccessMessage('');
+        setSnackbarMessage('');
         try {
             const response = await cambiarContraseña({ token, nuevaContrasena, confirmarContrasena });
-            setSuccessMessage(response.message);
+            setSnackbarMessage(response.message); 
+            setSnackbarSeverity('success');
+            setOpenSnackbar(true);
 
             // Eliminar el token del sessionStorage
             sessionStorage.removeItem('token');
 
-            // Redirigir a la página de inicio de sesión u otra página
-            navigate('/');
+            setTimeout(() => {
+                navigate('/');
+            }, 1500);
+
         } catch (error: any) {
             setError(error.message);
+            setSnackbarMessage(error.message); 
+            setSnackbarSeverity('error');
+            setOpenSnackbar(true);
         }
     };
 
@@ -47,7 +64,6 @@ const Reestablecer: React.FC = () => {
                     </Typography>
                 </Box>
                 {error && <Typography color="error">{error}</Typography>}
-                {successMessage && <Typography color="success">{successMessage}</Typography>}
                 <TextField
                     fullWidth
                     label="Nueva Contraseña"
@@ -88,6 +104,18 @@ const Reestablecer: React.FC = () => {
                 >
                     ACTUALIZAR CONTRASEÑA
                 </Button>
+
+                {/* Snackbar para mostrar mensajes de éxito o error */}
+                <Snackbar
+                    open={openSnackbar}
+                    autoHideDuration={4000}
+                    onClose={handleCloseSnackbar}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                >
+                    <Alert onClose={handleCloseSnackbar} severity={snackbarSeverity} sx={{ width: '100%' }}>
+                        {snackbarMessage}
+                    </Alert>
+                </Snackbar>
             </Container>
         </Layout>
     );

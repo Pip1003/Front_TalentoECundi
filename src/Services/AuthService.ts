@@ -3,7 +3,7 @@ import { API_URL } from '../config';
 
 export const login = async (correo: string, contrasena: string) => {
   try {
-    const response = await axios.post(`${API_URL}/api/v1/login`, {
+    const response = await axios.post(`${API_URL}/login`, {
       correo,
       contrasena,
     });

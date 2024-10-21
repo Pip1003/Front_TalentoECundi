@@ -138,7 +138,7 @@ const ResultadosTest: React.FC = () => {
                                 <Pagination.Next onClick={() => handlePageChange(selectedPage + 1)} disabled={selectedPage * preguntasPorPagina >= respuestasDetalle.length} />
                             </Pagination>
 
-                            <Button className={`mt-4 ${styles.finalizarButton}`}>
+                            <Button className={`mt-4 ${styles.finalizarButton}`} href='/perfilEgresado'>
                                 Finalizar Revisión
                             </Button>
                         </Card>
@@ -155,15 +155,8 @@ const ResultadosTest: React.FC = () => {
                                     ))}
                                 </div>
 
-                                {/* Renderizar la imagen si existe */}
                                 {respuesta.imagen && (
-                                    <div className="text-center mb-3">
-                                        <img
-                                            src={`data:image/jpeg;base64,${respuesta.imagen}`}
-                                            alt={`Pregunta ${indiceInicio + index + 1}`}
-                                            className={styles.imagenPregunta}
-                                        />
-                                    </div>
+                                    <img src={`data:image/jpeg;base64,${respuesta.imagen}`} alt="Pregunta" className={`${styles.preguntaImagen} mb-3`} />
                                 )}
 
                                 <Typography variant="body2" className="mb-4">{respuesta.contenido_pregunta}</Typography>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container } from 'react-bootstrap';
 import Layout from '../../layouts/LayoutGeneral/Layout';
-import { TextField, Button, Typography, Box } from '@mui/material';
+import { TextField, Button, Typography, Box, Snackbar, Alert } from '@mui/material';
 import { solicitarRecuperacion, verificarCodigoRecuperacion } from '../../../Services/RecuperacionService';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,19 +11,40 @@ const RecuperacionContraseña: React.FC = () => {
     const [token, setToken] = useState('');
     const [codigoValido, setCodigoValido] = useState(false);
     const [error, setError] = useState('');
-    const [mostrarCodigo, setMostrarCodigo] = useState(false); 
+    const [mostrarCodigo, setMostrarCodigo] = useState(false);
+    const [openSnackbar, setOpenSnackbar] = useState(false); // Controla el Snackbar
+    const [snackbarMessage, setSnackbarMessage] = useState(''); // Mensaje del Snackbar
+    const [snackbarSeverity, setSnackbarSeverity] = useState<'success' | 'error'>('success'); // Severidad del Snackbar
     const navigate = useNavigate();
+
+    // Manejar el cierre del Snackbar
+    const handleCloseSnackbar = (event?: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpenSnackbar(false);
+    };
 
     const handleEnviarCodigo = async () => {
         setError('');
         try {
             const response = await solicitarRecuperacion({ correo });
-            setToken(response.token); 
-            setMostrarCodigo(true); 
-            alert(response.message); 
+            setToken(response.token);
+            setMostrarCodigo(true);
+
+            // Mostrar Snackbar en lugar de alert
+            setSnackbarMessage(response.message);
+            setSnackbarSeverity('success');
+            setOpenSnackbar(true);
+
         } catch (error: any) {
             setError(error.message);
-            setMostrarCodigo(false); 
+            setMostrarCodigo(false);
+
+            // Mostrar Snackbar en lugar de alert
+            setSnackbarMessage(error.message);
+            setSnackbarSeverity('error');
+            setOpenSnackbar(true);
         }
     };
 
@@ -32,9 +53,24 @@ const RecuperacionContraseña: React.FC = () => {
         try {
             const response = await verificarCodigoRecuperacion({ token, codigoIngresado: codigo });
             setCodigoValido(true);
-            navigate("/reestablecer-contraseña");
+
+            // Mostrar mensaje de éxito en el Snackbar
+            setSnackbarMessage('Código validado correctamente. Serás redirigido.');
+            setSnackbarSeverity('success');
+            setOpenSnackbar(true);
+
+            // Redirigir después de 2 segundos
+            setTimeout(() => {
+                navigate("/reestablecer-contraseña");
+            }, 2000);
+
         } catch (error: any) {
             setError(error.message);
+
+            // Mostrar Snackbar en lugar de alert
+            setSnackbarMessage(error.message);
+            setSnackbarSeverity('error');
+            setOpenSnackbar(true);
         }
     };
 
@@ -100,19 +136,40 @@ const RecuperacionContraseña: React.FC = () => {
                                 height: '42px',
                                 margin: '0 auto',
                                 marginTop: '20px',
-                                marginBottom: '20px',
+                                marginBottom: '10px',
                                 display: 'block'
                             }}
                             onClick={handleValidarCodigo}
                         >
                             VALIDAR CÓDIGO
                         </Button>
+
+                        {/* Descripción indicando que el código expirará en 1 hora */}
+                        <Typography
+                            variant="body2"
+                            sx={{
+                                textAlign: 'center',
+                                color: '#555',
+                                fontStyle: 'italic',
+                                marginBottom: '20px'
+                            }}
+                        >
+                            El código expirará en 1 hora.
+                        </Typography>
                     </>
                 )}
 
-                {codigoValido && (
-                    <Typography color="success">Código validado correctamente. Puedes proceder a restablecer tu contraseña.</Typography>
-                )}
+                {/* Snackbar para mensajes */}
+                <Snackbar
+                    open={openSnackbar}
+                    autoHideDuration={4000}
+                    onClose={handleCloseSnackbar}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                >
+                    <Alert onClose={handleCloseSnackbar} severity={snackbarSeverity} sx={{ width: '100%' }}>
+                        {snackbarMessage}
+                    </Alert>
+                </Snackbar>
             </Container>
         </Layout>
     );

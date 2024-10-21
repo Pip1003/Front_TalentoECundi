@@ -1,8 +1,12 @@
 .container{
     padding-left: 40px;
     padding-right: 40px;
+    flex-grow: 1;
 }
 
 .content{
     background-color: #83A396;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }

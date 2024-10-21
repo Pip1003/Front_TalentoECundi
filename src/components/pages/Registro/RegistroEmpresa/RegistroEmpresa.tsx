@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import Layout from '../../../layouts/LayoutGeneral/Layout';
-import { TextField, Button, Typography, Box } from '@mui/material';
+import { TextField, Button, Typography, Box, Snackbar, Alert } from '@mui/material';
 import { RegistroEmpresaService } from '../../../../Services/RegistroEmService'; // Asegúrate de que la ruta sea correcta
 import { useNavigate } from 'react-router-dom';
 
@@ -21,6 +21,12 @@ const RegistroEmpresa: React.FC = () => {
         contrasena: '',
         confirmarContrasena: ''
     });
+
+    // Estado para controlar el Snackbar
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+
+    // Estado para controlar si se debe redirigir
+    const [shouldRedirect, setShouldRedirect] = useState(false);
 
     const navigate = useNavigate();
 
@@ -76,8 +82,12 @@ const RegistroEmpresa: React.FC = () => {
             try {
                 const response = await RegistroEmpresaService(formData);
                 console.log(response);
-                alert('Registro exitoso');
-                navigate('/');
+                // Mostrar el Snackbar cuando el registro sea exitoso
+                setOpenSnackbar(true);
+              
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+               
+                setTimeout(() => setShouldRedirect(true), 1500); 
             } catch (error: any) {
                 if (error.message === 'El correo ya está registrado') {
                     setErrors((prevErrors) => ({
@@ -89,6 +99,21 @@ const RegistroEmpresa: React.FC = () => {
                 }
             }
         }
+    };
+
+    
+    useEffect(() => {
+        if (shouldRedirect) {
+            navigate('/'); 
+        }
+    }, [shouldRedirect, navigate]);
+
+    // Función para cerrar el Snackbar manualmente
+    const handleCloseSnackbar = (event?: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpenSnackbar(false);
     };
 
     return (
@@ -205,6 +230,18 @@ const RegistroEmpresa: React.FC = () => {
                     >
                         Iniciar Sesión
                     </Button>
+
+                    {/* Snackbar para mostrar el mensaje de éxito */}
+                    <Snackbar
+                        open={openSnackbar}
+                        autoHideDuration={5000} 
+                        onClose={handleCloseSnackbar}
+                        anchorOrigin={{ vertical: 'top', horizontal: 'center' }} 
+                    >
+                        <Alert onClose={handleCloseSnackbar} severity="success" sx={{ width: '100%' }}>
+                            ¡Registro exitoso!
+                        </Alert>
+                    </Snackbar>
                 </Box>
             </Container>
         </Layout>

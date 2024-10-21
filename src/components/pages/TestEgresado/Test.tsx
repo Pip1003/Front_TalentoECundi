@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Card, Button, Pagination } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, Pagination, Modal } from 'react-bootstrap';
 import { Box, Typography, RadioGroup, FormControlLabel, Radio } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import Layout from '../../layouts/LayoutAuth/Layout';
 import styles from './styles.module.css';
 import { obtenerTestConDetalles, enviarRespuestasTest } from '../../../Services/TestService';
@@ -33,10 +34,16 @@ const TestEgresado: React.FC = () => {
     const [test, setTest] = useState<Test | null>(null);
     const [selectedPage, setSelectedPage] = useState<number>(1);
     const [selectedAnswers, setSelectedAnswers] = useState<Record<number, string>>({});
-    const [timeRemaining, setTimeRemaining] = useState<number>(0); 
-    const [isFinished, setIsFinished] = useState<boolean>(false); 
+    const [timeRemaining, setTimeRemaining] = useState<number>(0);
+    const [isFinished, setIsFinished] = useState<boolean>(false);
+    const [showModal, setShowModal] = useState<boolean>(false);
+    const [showFinishedModal, setShowFinishedModal] = useState<boolean>(false);
+    const navigate = useNavigate();
 
     const preguntasPorPagina = 2;
+    const testId = 3;
+    const localStorageTimeKey = `timeRemainingTest_${testId}`;
+    const localStorageAnswersKey = `selectedAnswersTest_${testId}`;
 
     // Obtener los datos del usuario desde el localStorage
     const usuarioString = localStorage.getItem('usuario');
@@ -45,15 +52,34 @@ const TestEgresado: React.FC = () => {
     if (usuarioString) {
         const usuario = JSON.parse(usuarioString);
         idEgresado = usuario.id_relacionado;
-        //console.log('ID del egresado:', idEgresado);
     }
 
     useEffect(() => {
         const fetchTest = async () => {
             try {
-                const testObtenido = await obtenerTestConDetalles(2);
+                // Verificar si ya se ha finalizado el test
+                const finishedTest = localStorage.getItem(`testFinished_${testId}`);
+                if (finishedTest) {
+                    navigate('/resultadosTest');
+                    return;
+                }
+
+                const testObtenido = await obtenerTestConDetalles(testId);
                 setTest(testObtenido);
-                setTimeRemaining(testObtenido.tiempo_minutos * 60); 
+
+                // Verificar si hay un tiempo restante guardado en localStorage
+                const savedTimeRemaining = localStorage.getItem(localStorageTimeKey);
+                if (savedTimeRemaining) {
+                    setTimeRemaining(parseInt(savedTimeRemaining, 10));
+                } else {
+                    setTimeRemaining(testObtenido.tiempo_minutos * 60);
+                }
+
+                // Verificar si hay respuestas seleccionadas guardadas en localStorage
+                const savedAnswers = localStorage.getItem(localStorageAnswersKey);
+                if (savedAnswers) {
+                    setSelectedAnswers(JSON.parse(savedAnswers));
+                }
             } catch (error) {
                 console.error('Error al cargar el test:', error);
             }
@@ -64,33 +90,49 @@ const TestEgresado: React.FC = () => {
 
     // Temporizador
     useEffect(() => {
-        if (timeRemaining === 0 && !isFinished) {
-            handleFinalizarPrueba(); 
-            return;
-        }
-
         if (timeRemaining > 0) {
             const timer = setInterval(() => {
-                setTimeRemaining((prev) => prev - 1);
+                setTimeRemaining((prev) => {
+                    const newTimeRemaining = prev - 1;
+
+                    // Guardar el tiempo restante en localStorage
+                    localStorage.setItem(localStorageTimeKey, newTimeRemaining.toString());
+
+                    if (newTimeRemaining <= 0) {
+                        handleFinalizarPrueba();
+                        setShowModal(true);
+                        clearInterval(timer);
+                        return 0;
+                    }
+
+                    return newTimeRemaining;
+                });
             }, 1000);
 
             return () => clearInterval(timer); // Limpieza del temporizador
         }
-    }, [timeRemaining, isFinished]);
+    }, [timeRemaining]);
 
     const handlePageChange = (pageNumber: number) => {
         setSelectedPage(pageNumber);
     };
 
     const handleAnswerChange = (preguntaId: number, answer: string) => {
-        setSelectedAnswers((prevState) => ({
-            ...prevState,
-            [preguntaId]: answer,
-        }));
+        setSelectedAnswers((prevState) => {
+            const newAnswers = {
+                ...prevState,
+                [preguntaId]: answer,
+            };
+
+            // Guardar las respuestas seleccionadas en localStorage
+            localStorage.setItem(localStorageAnswersKey, JSON.stringify(newAnswers));
+
+            return newAnswers;
+        });
     };
 
     const handleFinalizarPrueba = async () => {
-        if (isFinished) return; 
+        if (isFinished) return;
 
         const respuestas = Object.entries(selectedAnswers)
             .filter(([preguntaId, opcionId]) => opcionId !== '')
@@ -105,12 +147,29 @@ const TestEgresado: React.FC = () => {
         }
 
         try {
-            const resultado = await enviarRespuestasTest(2, idEgresado, respuestas); 
+            const resultado = await enviarRespuestasTest(testId, idEgresado, respuestas);
             console.log('Resultados:', resultado);
-            setIsFinished(true); 
+            setIsFinished(true);
+
+            // Limpiar el tiempo restante y respuestas de localStorage una vez que se finaliza el test
+            localStorage.removeItem(localStorageTimeKey);
+            localStorage.removeItem(localStorageAnswersKey);
+            localStorage.setItem(`testFinished_${testId}`, 'true');
+
+            setShowFinishedModal(true); // Mostrar el modal de finalización
         } catch (error) {
             console.error('Error al finalizar prueba:', error);
         }
+    };
+
+    const handleModalClose = () => {
+        setShowModal(false);
+        navigate('/resultadosTest');
+    };
+
+    const handleFinishedModalClose = () => {
+        setShowFinishedModal(false);
+        navigate('/resultadosTest');
     };
 
     if (!test) {
@@ -141,7 +200,7 @@ const TestEgresado: React.FC = () => {
                                 {test.preguntas.map((pregunta, i) => {
                                     const pageForQuestion = Math.floor(i / preguntasPorPagina) + 1;
                                     const isAnswered = !!selectedAnswers[pregunta.id];
-                                    const isActive = isAnswered ? 'active' : ''; 
+                                    const isActive = isAnswered ? 'active' : '';
                                     return (
                                         <Button
                                             key={i}
@@ -179,8 +238,8 @@ const TestEgresado: React.FC = () => {
                                     ))}
                                 </div>
 
-                                {pregunta.imagen && ( // Mostrar la imagen si existe
-                                    <img src={pregunta.imagen} alt="Pregunta" className="img-fluid mb-3" />
+                                {pregunta.imagen && (
+                                    <img src={`data:image/jpeg;base64,${pregunta.imagen}`} alt="Pregunta" className={`${styles.preguntaImagen} mb-3`} />
                                 )}
 
                                 <Typography variant="body2" className="mb-4">{pregunta.contenido}</Typography>
@@ -198,6 +257,32 @@ const TestEgresado: React.FC = () => {
                         ))}
                     </Col>
                 </Row>
+
+                {/* Modal que se muestra cuando el tiempo se agota */}
+                <Modal show={showModal} onHide={handleModalClose} centered>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Tiempo Agotado</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>El tiempo para completar la prueba se ha agotado.</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={handleModalClose}>
+                            Ok
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
+                {/* Modal que se muestra cuando se finaliza la prueba desde el botón */}
+                <Modal show={showFinishedModal} onHide={handleFinishedModalClose} centered>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Prueba Finalizada</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>Sus respuestas han sido enviadas al sistema con éxito.</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={handleFinishedModalClose}>
+                            Ok
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
             </Container>
         </Layout>
     );

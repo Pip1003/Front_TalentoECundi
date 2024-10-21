@@ -1,0 +1,50 @@
+
+.content {
+    min-height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    background-color: #00482B; 
+}
+
+.container {
+    flex-grow: 1; 
+    padding: 20px; 
+    background-color: #ffffff; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.card {
+    border-radius: 10px; 
+    margin-bottom: 20px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.cardFooterButtons {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.estadoOferta {
+    font-size: 0.9em;
+    color: #333;
+}
+
+.customButton {
+    background-color: #00482B !important; 
+    color: #ffffff !important; 
+    margin-right: 10px !important; 
+    border-radius: 8px !important; 
+}
+
+.customButton:last-child {
+    margin-right: 0; 
+}
+
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center ;
+    color: #00321E !important; 
+}

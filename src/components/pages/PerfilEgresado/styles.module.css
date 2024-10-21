@@ -1,0 +1,193 @@
+/* Estilos Generales */
+.profilePage {
+  padding: 20px;
+}
+
+/* Contenedor General */
+.cardContainer {
+  background-color: #C1D1CB !important;
+  padding: 20px 10px 20px 10px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+/* Estilos para la tarjeta de perfil */
+.cardProfile {
+  background-color: #C89104 !important;
+  color: #003A22 !important;
+  margin-bottom: 20px;
+}
+
+.cardTitle {
+  text-align: center;
+  font-weight: bold;
+}
+
+.imageContainer {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* General */
+.profilePage {
+  padding: 20px;
+}
+
+/* Card de Perfil */
+.cardProfile {
+  background-color: #C89104 !important;
+  color: #003A22 !important; 
+  margin-bottom: 20px !important;
+  position: relative !important; 
+}
+
+.cardTitle {
+  text-align: center !important;
+  font-weight: bold !important;
+}
+
+.imageContainer {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profileImage {
+  border-radius: 10%; 
+  width: 150px;
+  height: 150px;
+}
+
+.profileName {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.updateButton {
+  position: absolute !important;
+  top: 10px !important;
+  right: 10px !important;
+  background-color: #003A22 !important;
+  color: white !important;
+  min-width: 40px !important;
+  width: 40px !important;
+  height: 40px !important;
+  padding: 0 !important;
+  border-radius: 50% !important; 
+}
+
+
+/* Botón de Hoja de Vida */
+.cvButton {
+  background-color: #003A22 !important;
+  color: #FFFFFF !important; 
+  width: 100%;
+  margin-top: 20px;
+}
+
+
+
+.MuiTypography-body2 {
+  display: flex;
+  align-items: center;
+  color: #003A22; 
+}
+
+.MuiTypography-body2 svg {
+  margin-right: 8px;
+  color: #003A22; 
+}
+
+
+/* Títulos */
+.cardTitles {
+  margin-bottom: 20px !important;
+  background-color: #fff !important;
+  border-radius: 8px !important;
+}
+
+.titleChip {
+  background-color: #003A22 !important;
+  color: #FFF !important;
+  border-radius: 5px !important;
+}
+
+/* Contenedor blanco individual */
+.whiteCardContainer {
+  background-color: #FFFFFF; 
+  padding: 20px; 
+  border-radius: 10px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  margin-bottom: 20px; 
+  height: 73vh;
+}
+
+.containerNoTest {
+  background-color: #FFFFFF;
+  padding: 20px; 
+  border-radius: 10px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  height: 40vh;
+}
+
+.centeredButton {
+  background-color: #003A22 !important;  
+  color: #fff !important;                
+  margin-top: 16px !important;           
+  display: flex !important;              
+  justify-content: center !important;    
+}
+
+/* Resumen de la prueba técnica */
+.cardTechnicalSummary {
+  background-color: #C89104 !important;
+  color: #003A22 !important;
+  border-radius: 8px !important;
+  padding: 20px !important;
+
+}
+
+.centerText {
+  text-align: center;
+  font-weight: bold;
+  color: #FFFFFF;
+  margin-bottom: 10px;
+}
+
+.viewAnswersButton {
+  background-color: #003A22 !important;
+  color: #FFFFFF;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.cardTechnicalSummary .MuiTypography-h3 {
+  font-size: 2.5rem;
+  margin: 15px 0;
+}
+
+
+/* Habilidades */
+.skillsList {
+  margin-top: 20px;
+}
+
+.skillChip {
+  margin-left: 10px;
+  font-size: 1rem;
+  background-color: transparent;
+  color: #FFFFFF;
+}
+
+.skillItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  color: #FFFFFF;
+}
+
+.skillItem .percentage {
+  font-weight: bold;
+  color: #FFFFFF;
+}
