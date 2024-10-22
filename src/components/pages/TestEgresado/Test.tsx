@@ -57,12 +57,14 @@ const TestEgresado: React.FC = () => {
     useEffect(() => {
         const fetchTest = async () => {
             try {
+                /*
                 // Verificar si ya se ha finalizado el test
                 const finishedTest = localStorage.getItem(`testFinished_${testId}`);
                 if (finishedTest) {
                     navigate('/resultadosTest');
                     return;
                 }
+                */
 
                 const testObtenido = await obtenerTestConDetalles(testId);
                 setTest(testObtenido);

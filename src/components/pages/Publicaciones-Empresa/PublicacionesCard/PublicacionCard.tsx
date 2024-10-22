@@ -143,7 +143,7 @@ const PublicacionCard: React.FC = () => {
                         <Button
                             variant="contained"
                             className={styles.customButton}
-                            onClick={() => { }}
+                            href='/crear-oferta'
                         >
                             <Add style={{ marginRight: '8px' }} />
                             Agregar Nueva Oferta

@@ -105,7 +105,11 @@ const Navbar: React.FC = () => {
     };
 
     const handleLogoClick = () => {
-        navigate('/inicio');
+        if (idRol === 1) {
+            navigate('/inicio');
+        } else if (idRol === 2) {
+            navigate('/publicaciones');
+        }
     };
 
     return (

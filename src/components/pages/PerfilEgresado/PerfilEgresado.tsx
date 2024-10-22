@@ -248,6 +248,7 @@ const PerfilEgresadoPage: React.FC = () => {
                               <Button
                                 variant="contained"
                                 className={styles.viewAnswersButton}
+                                href="/resultadosTest"
                               >
                                 Ver Respuestas
                               </Button>
