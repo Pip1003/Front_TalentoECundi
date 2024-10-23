@@ -33,3 +33,17 @@ export const obtenerResultadosTest = async (idEgresado: number) => {
         throw error;
     }
 };
+
+export const obtenerEstadoTestEgresado = async (idTest: number, idEgresado: number) => {
+    try {
+        const response = await axios.get(`${API_URL}/test/${idTest}/egresado/${idEgresado}/estado`);
+        return response.data; // Retorna el estado en caso de éxito
+    } catch (error: any) {
+        if (error.response && error.response.status === 404) {
+            return null;
+        }
+        console.error('Error al obtener el estado del test egresado', error);
+        throw error;
+    }
+};
+

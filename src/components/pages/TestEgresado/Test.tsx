@@ -4,7 +4,7 @@ import { Box, Typography, RadioGroup, FormControlLabel, Radio } from '@mui/mater
 import { useNavigate } from 'react-router-dom';
 import Layout from '../../layouts/LayoutAuth/Layout';
 import styles from './styles.module.css';
-import { obtenerTestConDetalles, enviarRespuestasTest } from '../../../Services/TestService';
+import { obtenerTestConDetalles, enviarRespuestasTest, obtenerEstadoTestEgresado } from '../../../Services/TestService';
 
 interface Habilidad {
     id: number;
@@ -55,17 +55,18 @@ const TestEgresado: React.FC = () => {
     }
 
     useEffect(() => {
-        const fetchTest = async () => {
+        const verificarEstadoTest = async () => {
             try {
-                /*
-                // Verificar si ya se ha finalizado el test
-                const finishedTest = localStorage.getItem(`testFinished_${testId}`);
-                if (finishedTest) {
+                // Verificar el estado del test
+                const estadoTest = await obtenerEstadoTestEgresado(testId, idEgresado);
+
+                if (estadoTest === 'finalizado') {
+                    // Si el test ya fue finalizado, redirigir a la página de resultados
                     navigate('/resultadosTest');
                     return;
                 }
-                */
 
+                // Si el test no ha sido presentado (estadoTest es null), continuar cargando el test
                 const testObtenido = await obtenerTestConDetalles(testId);
                 setTest(testObtenido);
 
@@ -83,12 +84,12 @@ const TestEgresado: React.FC = () => {
                     setSelectedAnswers(JSON.parse(savedAnswers));
                 }
             } catch (error) {
-                console.error('Error al cargar el test:', error);
+                console.error('Error al verificar el estado del test o cargar el test:', error);
             }
         };
 
-        fetchTest();
-    }, []);
+        verificarEstadoTest();
+    }, [testId, idEgresado, navigate]);
 
     // Temporizador
     useEffect(() => {
